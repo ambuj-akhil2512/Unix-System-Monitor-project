@@ -1,0 +1,57 @@
+// Step 3: Implementing the Monitor Class
+
+// monitor.cpp
+
+#include "monitor.h"
+#include <iostream>
+#include <cstdio>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
+// Helper function to execute a Unix command and capture its output
+std::string Monitor::executeCommand(const std::string& command) {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::shared_ptr<FILE> pipe(popen(command.c_str(), "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr) {
+            result += buffer.data();
+        }
+    }
+    return result;
+}
+
+std::string Monitor::executePS() {
+    // Execute 'ps' command and return output
+    return executeCommand("ps");
+}
+
+std::string Monitor::executePStack() {
+    // Execute 'pstack' command and return output
+    return executeCommand("pstack");
+}
+
+std::string Monitor::executePMap() {
+    // Execute 'pmap' command and return output
+    return executeCommand("pmap");
+}
+
+std::string Monitor::executeVMStat() {
+    // Execute 'vmstat' command and return output
+    return executeCommand("vmstat");
+}
+
+std::string Monitor::executeIOStat() {
+    // Execute 'iostat' command and return output
+    return executeCommand("iostat");
+}
+
+std::string Monitor::executeNetStat() {
+    // Execute 'netstat' command and return output
+    return executeCommand("netstat");
+}
