@@ -1,0 +1,30 @@
+// Step 2: Designing the Monitor Class
+
+// monitor.h
+
+#ifndef MONITOR_H
+#define MONITOR_H
+
+#include <string>
+
+class Monitor {
+public:
+    Monitor();
+    ~Monitor();
+
+    // Function declarations for executing Unix commands
+    std::string executePS();
+    std::string executePStack();
+    std::string executePMap();
+    std::string executeVMStat();
+    std::string executeIOStat();
+    std::string executeNetStat();
+
+private:
+    // Helper functions for executing commands and parsing output
+    std::string executeCommand(const std::string& command);
+    std::string parsePSOutput(const std::string& psOutput);
+    // Add similar functions for other commands as needed
+};
+
+#endif // MONITOR_H
