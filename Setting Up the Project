@@ -1,0 +1,11 @@
+# Step 1: Setting Up the Project
+
+# Create a new directory for your project
+mkdir UnixSystemMonitor
+cd UnixSystemMonitor
+
+# Inside the directory, create the necessary source files
+touch main.cpp monitor.cpp monitor.h
+
+# Optionally, set up a Makefile for compiling the project
+touch Makefile
